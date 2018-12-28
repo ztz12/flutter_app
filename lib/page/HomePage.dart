@@ -76,6 +76,7 @@ class _NewsListState extends State<HomePage> with HttpExt {
     ///先从缓存中获取banner图片数据
     var cacheData = await SharedPrfUtils.get(url);
     if (cacheData != null) {
+      //将json字符串转化成Dart对象,这里是Map
       var userMap = json.decode(cacheData);
       CategoryResponse categoryResponse = CategoryResponse.fromJson(userMap);
       print("banner获取缓存数据成功");
@@ -99,6 +100,7 @@ class _NewsListState extends State<HomePage> with HttpExt {
             listData = _listData;
             //目前只缓存第一页数据
             SharedPrfUtils.saveString(
+              //json.encode()序列化json
                 url, json.encode(categoryResponse.toJson()));
           });
         }
